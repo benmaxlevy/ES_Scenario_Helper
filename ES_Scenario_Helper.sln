@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30330.147
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ES_Scenario_Helper", "ES_Scenario_Helper\ES_Scenario_Helper.csproj", "{44CCCA9E-364B-458F-9E26-73F87CF908FB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{44CCCA9E-364B-458F-9E26-73F87CF908FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44CCCA9E-364B-458F-9E26-73F87CF908FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44CCCA9E-364B-458F-9E26-73F87CF908FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44CCCA9E-364B-458F-9E26-73F87CF908FB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D4586F4C-DA21-44FC-B186-D9AACC4B52DF}
+	EndGlobalSection
+EndGlobal
