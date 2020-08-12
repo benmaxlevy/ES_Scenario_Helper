@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ES_Scenario_Helper"
         mc:Ignorable="d"
-        Title="ES_Scenario_Helper - Ben Levy" Height="1000" Width="900">
+        Title="ES_Scenario_Helper - Ben Levy" Height="400" Width="900">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
@@ -15,10 +15,38 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <TextBox Name="Lat">Latitude</TextBox>
-        <TextBox Name="Lon" Grid.Row="1">Longitiude</TextBox>
-        <TextBox Name="Result" Grid.Column="1" IsReadOnly="True">Result</TextBox>
-        
+        <StackPanel Margin="10">
+            <Label Content="Latitude:"></Label>
+            <TextBox Name="Lat">N048.10.38.498</TextBox>
+
+            <Label Content="Longitude:" Grid.Row="1"></Label>
+            <TextBox Name="Lon" Grid.Row="1">E048.10.38.498</TextBox>
+
+            <Label Content="Altitude:" Grid.Row="2"></Label>
+            <TextBox Name="Alt" Grid.Row="2">0</TextBox>
+
+            <Label Content="Ground Speed:" Grid.Row="3"></Label>
+            <TextBox Name="GndSpd" Grid.Row="3">0</TextBox>
+
+            <Label Content="Heading:" Grid.Row="4"></Label>
+            <TextBox Name="Hdg" Grid.Row="4">0</TextBox>
+
+			<Label Content="Number of Aircraft:" Grid.Row="5"></Label>
+            <TextBox Name="NumAc" Grid.Row="5">0</TextBox>
+
+            <Label Content="Time in between Aircraft:" Grid.Row="6"></Label>
+            <TextBox Name="BetweenAc" Grid.Row="6">0</TextBox>
+
+			<Button Click="Generate">Generate</Button>
+        </StackPanel>
+
+        <!-- right column -->
+        <TextBox Margin="10" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" Name="Result" Grid.Column="1" IsReadOnly="True">Result</TextBox>
     </Grid>
 </Window>
