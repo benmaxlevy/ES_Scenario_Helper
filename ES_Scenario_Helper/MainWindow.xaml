@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ES_Scenario_Helper"
         mc:Ignorable="d"
-        Title="ES_Scenario_Helper - Ben Levy" Height="400" Width="900">
+        ResizeMode="NoResize"
+        Title="ES Scenario Helper - Ben Levy" Height="575" Width="900">
     <Grid>
-        <Grid.ColumnDefinitions>
+             <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="2*" />
         </Grid.ColumnDefinitions>
@@ -20,33 +21,51 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <StackPanel Margin="10">
-            <Label Content="Latitude:"></Label>
-            <TextBox Name="Lat">N048.10.38.498</TextBox>
+            <Label Target="{Binding ElementName=Lat}" Content="Latitude:"></Label>
+            <TextBox Grid.ColumnSpan="2" Grid.Row="0" Grid.Column="0" Name="Lat">N048.10.38.498</TextBox>
+   
+            <Label Target="{Binding ElementName=Lon}" Content="Longitude:" Grid.Row="1" Grid.Column="0"></Label>
+            <TextBox Name="Lon" Grid.Row="1" Grid.Column="0">E048.10.38.498</TextBox>
+   
+            <Label Target="{Binding ElementName=Alt}" Content="Altitude:" Grid.Row="2" Grid.Column="0"></Label>
+            <TextBox Name="Alt" Grid.Row="2" Grid.Column="0">0</TextBox>
+   
+            <Label Target="{Binding ElementName=GndSpd}" Content="Ground Speed:" Grid.Row="3" Grid.Column="0"></Label>
+            <TextBox Name="GndSpd" Grid.Row="3" Grid.Column="0">0</TextBox>
+   
+            <Label Target="{Binding ElementName=Hdg}" Content="Heading:" Grid.Row="4" Grid.Column="0"></Label>
+            <TextBox Name="Hdg" Grid.Row="4" Grid.Column="0">0</TextBox>
+   
+            <Label Target="{Binding ElementName=NumAc}" Content="Number of Aircraft:" Grid.Row="5" Grid.Column="0"></Label>
+            <TextBox Name="NumAc" Grid.Row="5" Grid.Column="0">0</TextBox>
 
-            <Label Content="Longitude:" Grid.Row="1"></Label>
-            <TextBox Name="Lon" Grid.Row="1">E048.10.38.498</TextBox>
+            <Label Target="{Binding ElementName=Dept}" Grid.Row="6" Content="Departure Airport:"></Label>
+            <TextBox Name="Dept" Grid.Row="6" Grid.Column="0">KSEA</TextBox>
+   
+            <Label Target="{Binding ElementName=Arrival}" Content="Arrival Airport:" Grid.Row="7" Grid.Column="0"></Label>
+            <TextBox Name="Arrival" Grid.Row="7" Grid.Column="0">KDEN</TextBox>
 
-            <Label Content="Altitude:" Grid.Row="2"></Label>
-            <TextBox Name="Alt" Grid.Row="2">0</TextBox>
+            <Label Target="{Binding ElementName=Route}" Content="Route:" Grid.Row="8" Grid.Column="0"></Label>
+            <TextBox Name="Route" Grid.Row="8" Grid.Column="0">CLASH1</TextBox>
+   
+            <Label Target="{Binding ElementName=BetweenAc}" Content="Time in between Aircraft:" Grid.Row="9"
+                   Grid.Column="0"></Label>
+            <TextBox Name="BetweenAc" Grid.Row="10" Grid.Column="0">0</TextBox>
+   
+			<Button Margin="0,10" Grid.Row="11" Click="Generate">Generate</Button>
 
-            <Label Content="Ground Speed:" Grid.Row="3"></Label>
-            <TextBox Name="GndSpd" Grid.Row="3">0</TextBox>
+            <Button Grid.Row="12" Click="CopyResult">Copy Result</Button>
 
-            <Label Content="Heading:" Grid.Row="4"></Label>
-            <TextBox Name="Hdg" Grid.Row="4">0</TextBox>
-
-			<Label Content="Number of Aircraft:" Grid.Row="5"></Label>
-            <TextBox Name="NumAc" Grid.Row="5">0</TextBox>
-
-            <Label Content="Time in between Aircraft:" Grid.Row="6"></Label>
-            <TextBox Name="BetweenAc" Grid.Row="6">0</TextBox>
-
-			<Button Click="Generate">Generate</Button>
         </StackPanel>
-
+   
         <!-- right column -->
-        <TextBox Margin="10" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" Name="Result" Grid.Column="1" IsReadOnly="True">Result</TextBox>
+        <TextBox Margin="10" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" Name="Result" Grid.Row="0" Grid.Column="1" IsReadOnly="True">Result</TextBox>
     </Grid>
 </Window>

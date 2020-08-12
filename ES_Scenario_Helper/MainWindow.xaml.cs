@@ -25,7 +25,9 @@ namespace ES_Scenario_Helper
             InitializeComponent();
         }
         
-        private String GenerateAcPosition(String Lat, String Lon, String Alt, String GndSpd, String Hdg, Random rand)
+        //helpers
+
+        private string[] GenerateAcPosition(String lat, String lon, String alt, String gndSpd, String hdg, Random rand)
         {
             //array for a bunch of callsigns
             string[] callsigns = //13 (from the 0th index)
@@ -54,11 +56,46 @@ namespace ES_Scenario_Helper
             //rand num for squawk
             int squawk = rand.Next(1000, 7000);
 
-            String Position = "@N:" + callsigns[callsign] + callsignNum + ":" + squawk + ":1:";
+            string position = "@N:" + callsigns[callsign] + callsignNum + ":" + squawk + ":1:";
 
-            Position = Position + Lat + ":" + Lon + ":" + Alt + ":" + GndSpd + ":0:" + Hdg + ":0";
+            position = position + lat + ":" + lon + ":" + alt + ":" + gndSpd + ":0:" + hdg + ":0";
 
-            return Position;
+            string[] ac =
+            {
+                callsigns[callsign] + callsignNum,
+                position
+            };
+
+            return ac;
+        }
+
+        private string GenerateAcFlightPlan(string callsign, Random rand)
+        {
+
+            string[] aircrafts = //up to index of 7
+            {
+                "A318",
+                "A321",
+                "B712",
+                "B737",
+                "B739",
+                "E195",
+                "B752",
+                "A333",
+                "B744"
+            };
+
+            int aircraftNum = rand.Next(0, 7);
+
+            string result = "$FP" + callsign + ":*A:I:" + aircrafts[aircraftNum] + ":300:" + Dept.Text + ":0000:0000:0:" + Arrival.Text + ":0:0:0:0::/v/:" + Route.Text;
+
+            return result;
+        }
+
+        //"click" methods
+        private void CopyResult(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Clipboard.SetText(Result.Text);
         }
 
         private void Generate(object sender, RoutedEventArgs e)
@@ -69,7 +106,8 @@ namespace ES_Scenario_Helper
 
             for (int i = 0; i < Int16.Parse(NumAc.Text); i++)
             {
-                Result.Text += this.GenerateAcPosition(Lat.Text, Lon.Text, Alt.Text, GndSpd.Text, Hdg.Text, rand) + "\n";
+                string[] position = this.GenerateAcPosition(Lat.Text, Lon.Text, Alt.Text, GndSpd.Text, Hdg.Text, rand);
+                Result.Text += position[1] + "\n" + this.GenerateAcFlightPlan(position[0], rand) + "\n \n";
             }
         }
     }
