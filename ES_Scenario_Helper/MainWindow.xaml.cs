@@ -69,9 +69,10 @@ namespace ES_Scenario_Helper
             return ac;
         }
 
-        private string GenerateAcRoute(string callsign, int minBetweenAc, int acGenerated)
+        private string GenerateAcRoute(string callsign, int acGenerated)
         {
-
+            string result = "$ROUTE:" + Route.Text + "\n" + "START:" + Int16.Parse(BetweenAc.Text)*acGenerated + "\nDELAY:2:5\nREQALT:" + Waypoint.Text + ":" + WaypointCross.Text + "\n";
+            return result;
         }
 
         private string GenerateAcFlightPlan(string callsign, Random rand)
@@ -92,7 +93,7 @@ namespace ES_Scenario_Helper
 
             int aircraftNum = rand.Next(0, 7);
 
-            string result = "$FP" + callsign + ":*A:I:" + aircrafts[aircraftNum] + ":300:" + Dept.Text + ":0000:0000:0:" + Arrival.Text + ":0:0:0:0::/v/:" + Route.Text;
+            string result = "$FP" + callsign + ":*A:I:" + aircrafts[aircraftNum] + ":300:" + Dept.Text + ":0000:0000:0:" + Arrival.Text + ":0:0:0:0::/v/:" + FlightPlanRoute.Text;
 
             return result;
         }
@@ -112,7 +113,7 @@ namespace ES_Scenario_Helper
             for (int i = 0; i < Int16.Parse(NumAc.Text); i++)
             {
                 string[] position = this.GenerateAcPosition(Lat.Text, Lon.Text, Alt.Text, GndSpd.Text, Hdg.Text, rand);
-                Result.Text += position[1] + "\n" + this.GenerateAcFlightPlan(position[0], rand) + "\n \n";
+                Result.Text += position[1] + "\n" + this.GenerateAcFlightPlan(position[0], rand) + "\n" + this.GenerateAcRoute(position[0], i) + "\n";
             }
         }
     }
