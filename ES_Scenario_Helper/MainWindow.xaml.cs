@@ -69,6 +69,11 @@ namespace ES_Scenario_Helper
             return ac;
         }
 
+        private string GenerateAcRoute(string callsign, int minBetweenAc, int acGenerated)
+        {
+
+        }
+
         private string GenerateAcFlightPlan(string callsign, Random rand)
         {
 
