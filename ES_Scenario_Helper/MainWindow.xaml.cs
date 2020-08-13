@@ -18,6 +18,19 @@ namespace ES_Scenario_Helper
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+
+    public struct Airline
+    {
+        public string Icao;
+        public string[] Aircraft;
+
+        public Airline(string icao, string[] aircraft)
+        {
+            Icao = icao;
+            Aircraft = aircraft;
+        }
+    }
+
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -34,7 +47,6 @@ namespace ES_Scenario_Helper
             {
                 "AAL",
                 "UAL",
-                "HAL", 
                 "NKS",
                 "FFT",
                 "DAL",
@@ -77,6 +89,7 @@ namespace ES_Scenario_Helper
 
         private string GenerateAcFlightPlan(string callsign, Random rand)
         {
+            
 
             string[] aircrafts = //up to index of 7
             {
@@ -106,6 +119,63 @@ namespace ES_Scenario_Helper
 
         private void Generate(object sender, RoutedEventArgs e)
         {
+            //airline shit
+            string[] aalAircraft =
+            {
+                "A319",
+                "A321",
+                "A320",
+                "B737",
+                "A332",
+                "B772",
+            };
+
+            string[] ualAircraft =
+            {
+                "A319",
+                "A320",
+                "B737",
+                "B738",
+                "B739",
+                "B752",
+                "B772"  
+            };
+
+            string[] nksAircraft =
+            {
+                "A319",
+                "A320",
+                "A321"
+            };
+
+            string[] fftAircraft =
+            {
+                "A320",
+                "A321"
+            };
+
+            string[] dalAircraft =
+            {
+                "A319",
+                "A320",
+                "A321",
+                "A332",
+                "B712",
+                "B737",
+                "B738",
+                "B752"
+            };
+
+            Airline[] airlines =
+            {
+                new Airline("AAL", aalAircraft),
+                new Airline("UAL", ualAircraft),
+                new Airline("NKS", nksAircraft), 
+                new Airline("FFT", fftAircraft), 
+                new Airline("DAL", dalAircraft), 
+            };
+            //end airline shit
+            
             Result.Text = "";
 
             Random rand = new Random();
