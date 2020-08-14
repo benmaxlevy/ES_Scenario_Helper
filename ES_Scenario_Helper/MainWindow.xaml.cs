@@ -49,7 +49,7 @@ namespace ES_Scenario_Helper
             int callsignNum = rand.Next(1, 9999);
 
             //rand num for squawk
-            int squawk = rand.Next(1000, 7000);
+            int squawk = rand.Next(Int16.Parse(StartSquawk.Text), Int16.Parse(EndSquawk.Text));
 
             string position = "@N:" + airlines[callsign].Icao + callsignNum + ":" + squawk + ":1:";
 

@@ -6,13 +6,15 @@
         xmlns:local="clr-namespace:ES_Scenario_Helper"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="ES Scenario Helper - Ben Levy" Height="775" Width="900">
+        Title="ES Scenario Helper - Ben Levy" Height="820" Width="900">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="2*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -76,9 +78,17 @@
                    Grid.Column="0"></Label>
             <TextBox Name="WaypointCross" Grid.Row="13" Grid.Column="0">11000</TextBox>
 
-            <Button Margin="0,10" Grid.Row="14" Click="Generate">Generate</Button>
+            <Label Target="{Binding ElementName=StartSquawk}" Content="Starting Squawk:" Grid.Row="14"
+                   Grid.Column="0"></Label>
+            <TextBox Name="StartSquawk" Grid.Row="14" Grid.Column="0">1000</TextBox>
 
-            <Button Grid.Row="15" Click="CopyResult">Copy Result</Button>
+            <Label Target="{Binding ElementName=EndSquawk}" Content="Ending Squawk:" Grid.Row="15"
+                   Grid.Column="0"></Label>
+            <TextBox Name="EndSquawk" Grid.Row="15" Grid.Column="0">1100</TextBox>
+
+            <Button Margin="0,10" Grid.Row="16" Click="Generate">Generate</Button>
+
+            <Button Grid.Row="17" Click="CopyResult">Copy Result</Button>
 
         </StackPanel>
 
