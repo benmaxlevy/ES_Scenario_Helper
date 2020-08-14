@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:ES_Scenario_Helper"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="ES Scenario Helper - Ben Levy" Height="700" Width="900">
+        Title="ES Scenario Helper - Ben Levy" Height="775" Width="900">
     <Grid>
-             <Grid.ColumnDefinitions>
+        <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="2*" />
         </Grid.ColumnDefinitions>
@@ -28,61 +28,65 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <StackPanel Margin="10">
             <Label Target="{Binding ElementName=Lat}" Content="Latitude:"></Label>
             <TextBox Grid.ColumnSpan="2" Grid.Row="0" Grid.Column="0" Name="Lat">N048.10.38.498</TextBox>
-   
+
             <Label Target="{Binding ElementName=Lon}" Content="Longitude:" Grid.Row="1" Grid.Column="0"></Label>
             <TextBox Name="Lon" Grid.Row="1" Grid.Column="0">E048.10.38.498</TextBox>
-   
+
             <Label Target="{Binding ElementName=Alt}" Content="Altitude:" Grid.Row="2" Grid.Column="0"></Label>
             <TextBox Name="Alt" Grid.Row="2" Grid.Column="0">0</TextBox>
-   
+
             <Label Target="{Binding ElementName=GndSpd}" Content="Ground Speed:" Grid.Row="3" Grid.Column="0"></Label>
             <TextBox Name="GndSpd" Grid.Row="3" Grid.Column="0">0</TextBox>
-   
+
             <Label Target="{Binding ElementName=Hdg}" Content="Heading:" Grid.Row="4" Grid.Column="0"></Label>
             <TextBox Name="Hdg" Grid.Row="4" Grid.Column="0">0</TextBox>
-   
+
             <Label Target="{Binding ElementName=NumAc}" Content="Number of Aircraft:" Grid.Row="5" Grid.Column="0"></Label>
             <TextBox Name="NumAc" Grid.Row="5" Grid.Column="0">0</TextBox>
 
             <Label Target="{Binding ElementName=Dept}" Grid.Row="6" Content="Departure Airport:"></Label>
             <TextBox Name="Dept" Grid.Row="6" Grid.Column="0">KSEA</TextBox>
-   
+
             <Label Target="{Binding ElementName=Arrival}" Content="Arrival Airport:" Grid.Row="7" Grid.Column="0"></Label>
             <TextBox Name="Arrival" Grid.Row="7" Grid.Column="0">KDEN</TextBox>
 
             <Label Target="{Binding ElementName=Route}" Content="Route For ES:" Grid.Row="8" Grid.Column="0"></Label>
             <TextBox Name="Route" Grid.Row="8" Grid.Column="0">CLASH EVRLY HASHE JAAAM HUDPI QWIKE</TextBox>
 
-            <Label Target="{Binding ElementName=FlightPlanRoute}" Content="Route For Flight Plan:" Grid.Row="8" Grid.Column="0"></Label>
+            <Label Target="{Binding ElementName=FlightPlanRoute}" Content="Route For Flight Plan:" Grid.Row="9" Grid.Column="0"></Label>
             <TextBox Name="FlightPlanRoute" Grid.Row="9" Grid.Column="0">CLASH1</TextBox>
-   
-            <Label Target="{Binding ElementName=BetweenAc}" Content="Time in between Aircraft:" Grid.Row="10"
-                   Grid.Column="0"></Label>
-            <TextBox Name="BetweenAc" Grid.Row="10" Grid.Column="0">0</TextBox>
 
-            <Label Target="{Binding ElementName=BetweenAc}" Content="Waypoint to Cross At:" Grid.Row="11"
-                   Grid.Column="0"></Label>
-            <TextBox Name="Waypoint" Grid.Row="11" Grid.Column="0">QWIKE</TextBox>
+            <Label Target="{Binding ElementName=FlightPlanAlt}" Content="Altitude For Flight Plan:" Grid.Row="10" Grid.Column="0"></Label>
+            <TextBox Name="FlightPlanAlt" Grid.Row="9" Grid.Column="0">38000</TextBox>
 
-            <Label Target="{Binding ElementName=WaypointCross}" Content="Altitude to Cross Waypoint At:" Grid.Row="12"
+            <Label Target="{Binding ElementName=BetweenAc}" Content="Time in between Aircraft:" Grid.Row="11"
                    Grid.Column="0"></Label>
-            <TextBox Name="WaypointCross" Grid.Row="12" Grid.Column="0">11000</TextBox>
-   
-			<Button Margin="0,10" Grid.Row="13" Click="Generate">Generate</Button>
+            <TextBox Name="BetweenAc" Grid.Row="11" Grid.Column="0">0</TextBox>
 
-            <Button Grid.Row="14" Click="CopyResult">Copy Result</Button>
+            <Label Target="{Binding ElementName=BetweenAc}" Content="Waypoint to Cross At:" Grid.Row="12"
+                   Grid.Column="0"></Label>
+            <TextBox Name="Waypoint" Grid.Row="12" Grid.Column="0">QWIKE</TextBox>
+
+            <Label Target="{Binding ElementName=WaypointCross}" Content="Altitude to Cross Waypoint At:" Grid.Row="13"
+                   Grid.Column="0"></Label>
+            <TextBox Name="WaypointCross" Grid.Row="13" Grid.Column="0">11000</TextBox>
+
+            <Button Margin="0,10" Grid.Row="14" Click="Generate">Generate</Button>
+
+            <Button Grid.Row="15" Click="CopyResult">Copy Result</Button>
 
         </StackPanel>
-   
+
         <!-- right column -->
         <TextBox HorizontalScrollBarVisibility="Visible"
 
                  VerticalScrollBarVisibility="Visible"
 
-                 TextWrapping="Wrap" Margin="10" Name="Result" Height="630px"  Grid.Row="0" Grid.Column="1" IsReadOnly="True">Result</TextBox>
+                 TextWrapping="Wrap" Margin="10,34,10,10" Name="Result"  Grid.Row="0" Grid.Column="1" IsReadOnly="True">Result</TextBox>
     </Grid>
 </Window>

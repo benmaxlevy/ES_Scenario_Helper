@@ -40,27 +40,10 @@ namespace ES_Scenario_Helper
         
         //helpers
 
-        private string[] GenerateAcPosition(String lat, String lon, String alt, String gndSpd, String hdg, Random rand)
+        private object[] GenerateAcPosition(String lat, String lon, String alt, String gndSpd, String hdg, Random rand, Airline[] airlines)
         {
-            //array for a bunch of callsigns
-            string[] callsigns = //13 (from the 0th index)
-            {
-                "AAL",
-                "UAL",
-                "NKS",
-                "FFT",
-                "DAL",
-                "UPS",
-                "FDX",
-                "JBU",
-                "EXJ",
-                "ASA",
-                "AAY",
-                "DLH",
-                "BAW"
-            };
             //rand num for selecting callsign
-            int callsign = rand.Next(0, 13);
+            int callsign = rand.Next(0, airlines.Length);
 
             //rand num for callsign num
             int callsignNum = rand.Next(1, 9999);
@@ -68,45 +51,31 @@ namespace ES_Scenario_Helper
             //rand num for squawk
             int squawk = rand.Next(1000, 7000);
 
-            string position = "@N:" + callsigns[callsign] + callsignNum + ":" + squawk + ":1:";
+            string position = "@N:" + airlines[callsign].Icao + callsignNum + ":" + squawk + ":1:";
 
             position = position + lat + ":" + lon + ":" + alt + ":" + gndSpd + ":0:" + hdg + ":0";
 
-            string[] ac =
-            {
-                callsigns[callsign] + callsignNum,
-                position
+            object[] ac =
+            new object[] {
+                airlines[callsign].Icao + callsignNum,
+                position,
+                airlines[callsign].Aircraft
             };
 
             return ac;
         }
 
-        private string GenerateAcRoute(string callsign, int acGenerated)
+        private string GenerateAcRoute(int acGenerated)
         {
             string result = "$ROUTE:" + Route.Text + "\n" + "START:" + Int16.Parse(BetweenAc.Text)*acGenerated + "\nDELAY:2:5\nREQALT:" + Waypoint.Text + ":" + WaypointCross.Text + "\n";
             return result;
         }
 
-        private string GenerateAcFlightPlan(string callsign, Random rand)
+        private string GenerateAcFlightPlan(object callsign, Random rand, string[] airlineAircrafts)
         {
-            
+            int aircraftNum = rand.Next(0, airlineAircrafts.Length);
 
-            string[] aircrafts = //up to index of 7
-            {
-                "A318",
-                "A321",
-                "B712",
-                "B737",
-                "B739",
-                "E195",
-                "B752",
-                "A333",
-                "B744"
-            };
-
-            int aircraftNum = rand.Next(0, 7);
-
-            string result = "$FP" + callsign + ":*A:I:" + aircrafts[aircraftNum] + ":300:" + Dept.Text + ":0000:0000:0:" + Arrival.Text + ":0:0:0:0::/v/:" + FlightPlanRoute.Text;
+            string result = "$FP" + callsign + ":*A:I:" + airlineAircrafts[aircraftNum] + ":300:" + Dept.Text + ":0000:0000:" + FlightPlanAlt.Text + ":" + Arrival.Text + ":0:0:0:0::/v/:" + FlightPlanRoute.Text;
 
             return result;
         }
@@ -166,6 +135,30 @@ namespace ES_Scenario_Helper
                 "B752"
             };
 
+            string[] upsAircraft =
+            {
+                "A306",
+                "B744",
+                "B752",
+                "B763",
+                "MD11"
+            };
+
+            string[] fdxAircraft =
+            {
+                "A306",
+                "B752",
+                "B763",
+                "B772",
+                "MD11"
+            };
+
+            string[] exjAircraft =
+            {
+                "LJ35",
+                "LJ45"
+            };
+
             Airline[] airlines =
             {
                 new Airline("AAL", aalAircraft),
@@ -173,6 +166,9 @@ namespace ES_Scenario_Helper
                 new Airline("NKS", nksAircraft), 
                 new Airline("FFT", fftAircraft), 
                 new Airline("DAL", dalAircraft), 
+                new Airline("UPS", upsAircraft), 
+                new Airline("FDX", fdxAircraft), 
+                new Airline("EXJ", exjAircraft) 
             };
             //end airline shit
             
@@ -182,8 +178,8 @@ namespace ES_Scenario_Helper
 
             for (int i = 0; i < Int16.Parse(NumAc.Text); i++)
             {
-                string[] position = this.GenerateAcPosition(Lat.Text, Lon.Text, Alt.Text, GndSpd.Text, Hdg.Text, rand);
-                Result.Text += position[1] + "\n" + this.GenerateAcFlightPlan(position[0], rand) + "\n" + this.GenerateAcRoute(position[0], i) + "\n";
+                object[] position = this.GenerateAcPosition(Lat.Text, Lon.Text, Alt.Text, GndSpd.Text, Hdg.Text, rand, airlines);
+                Result.Text += position[1] + "\n" + this.GenerateAcFlightPlan(position[0], rand, (string[])position[2]) + "\n" + this.GenerateAcRoute(i) + "\n";
             }
         }
     }
