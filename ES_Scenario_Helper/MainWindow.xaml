@@ -87,6 +87,6 @@
 
                  VerticalScrollBarVisibility="Visible"
 
-                 TextWrapping="Wrap" Margin="10,34,10,10" Name="Result"  Grid.Row="0" Grid.Column="1" IsReadOnly="True">Result</TextBox>
+                 TextWrapping="Wrap" Margin="10" Name="Result" Height="630px"  Grid.Row="0" Grid.Column="1" IsReadOnly="True">Result</TextBox>
     </Grid>
 </Window>
