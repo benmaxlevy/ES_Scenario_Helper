@@ -40,7 +40,7 @@ namespace ES_Scenario_Helper
         
         //helpers
 
-        private object[] GenerateAcPosition(String lat, String lon, String alt, String gndSpd, String hdg, Random rand, Airline[] airlines)
+        private object[] GenerateAcPosition(String lat, String lon, String alt, String gndSpd, String hdg, Random rand, Airline[] airlines, int[] squawks)
         {
             //rand num for selecting callsign
             int callsign = rand.Next(0, airlines.Length);
@@ -51,6 +51,11 @@ namespace ES_Scenario_Helper
             //rand num for squawk
             int squawk = rand.Next(Int16.Parse(StartSquawk.Text), Int16.Parse(EndSquawk.Text));
 
+            while (squawks.Contains(squawk))
+            {
+                squawk += 1;
+            }
+
             string position = "@N:" + airlines[callsign].Icao + callsignNum + ":" + squawk + ":1:";
 
             position = position + lat + ":" + lon + ":" + alt + ":" + gndSpd + ":0:" + hdg + ":0";
@@ -59,7 +64,8 @@ namespace ES_Scenario_Helper
             new object[] {
                 airlines[callsign].Icao + callsignNum,
                 position,
-                airlines[callsign].Aircraft
+                airlines[callsign].Aircraft,
+                squawk
             };
 
             return ac;
@@ -153,10 +159,17 @@ namespace ES_Scenario_Helper
                 "MD11"
             };
 
-            string[] exjAircraft =
+            string[] ejaAircraft =
             {
                 "LJ35",
                 "LJ45"
+            };
+
+            string[] capAircraft =
+            {
+                "C172",
+                "C182",
+                "C152"
             };
 
             Airline[] airlines =
@@ -168,7 +181,8 @@ namespace ES_Scenario_Helper
                 new Airline("DAL", dalAircraft), 
                 new Airline("UPS", upsAircraft), 
                 new Airline("FDX", fdxAircraft), 
-                new Airline("EXJ", exjAircraft) 
+                new Airline("EJA", ejaAircraft),
+                new Airline("CAP", capAircraft)
             };
             //end airline shit
             
@@ -176,9 +190,12 @@ namespace ES_Scenario_Helper
 
             Random rand = new Random();
 
+            List<int> squawks = new List<int>();
+
             for (int i = 0; i < Int16.Parse(NumAc.Text); i++)
             {
-                object[] position = this.GenerateAcPosition(Lat.Text, Lon.Text, Alt.Text, GndSpd.Text, Hdg.Text, rand, airlines);
+                object[] position = this.GenerateAcPosition(Lat.Text, Lon.Text, Alt.Text, GndSpd.Text, Hdg.Text, rand, airlines, squawks.ToArray());
+                squawks.Add((int)position[3]);
                 Result.Text += position[1] + "\n" + this.GenerateAcFlightPlan(position[0], rand, (string[])position[2]) + "\n" + this.GenerateAcRoute(i) + "\n";
             }
         }
