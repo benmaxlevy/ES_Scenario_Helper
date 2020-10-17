@@ -51,9 +51,25 @@ namespace ES_Scenario_Helper
             //rand num for squawk
             int squawk = rand.Next(Int16.Parse(StartSquawk.Text), Int16.Parse(EndSquawk.Text));
 
+            if(squawk.ToString().Contains('8'))
+            {
+                squawk = Int16.Parse(squawk.ToString().Replace('8', '2'));
+            } else if(squawk.ToString().Contains('9'))
+            {
+                squawk = Int16.Parse(squawk.ToString().Replace('9', '3'));
+            }
+
             while (squawks.Contains(squawk))
             {
                 squawk += 1;
+                if (squawk.ToString().Contains('8'))
+                {
+                    squawk = Int16.Parse(squawk.ToString().Replace('8', '2'));
+                }
+                else if (squawk.ToString().Contains('9'))
+                {
+                    squawk = Int16.Parse(squawk.ToString().Replace('9', '3'));
+                }
             }
 
             string position = "@N:" + airlines[callsign].Icao + callsignNum + ":" + squawk + ":1:";
@@ -182,7 +198,7 @@ namespace ES_Scenario_Helper
                 new Airline("UPS", upsAircraft), 
                 new Airline("FDX", fdxAircraft), 
                 new Airline("EJA", ejaAircraft),
-                new Airline("CAP", capAircraft)
+                //new Airline("CAP", capAircraft)
             };
             //end airline shit
             
